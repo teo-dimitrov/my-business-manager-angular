@@ -1,0 +1,140 @@
+<div class="container">
+  <h2 class="text-center">Register User</h2>
+
+  <hr>
+
+  <div class="card">
+    <form
+      class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center"
+      #registerForm="ngForm" >
+      <div class="row">
+        <div class="form-group col-md-6 mb-3">
+          <div>
+            <label for="username" class="font-weight-bold">Username</label>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+              </div>
+              <input id="username" type="text" class="form-control" name="username" placeholder="Username" required
+                     ngModel
+                     #usernameInput="ngModel">
+            </div>
+            <small class="form-text bg-danger rounded text-white"
+                   *ngIf="usernameInput.invalid && usernameInput.touched">Please enter a username</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <div>
+            <label for="email" class="font-weight-bold">Email</label>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              </div>
+              <input id="email" type="text" class="form-control" name="email" placeholder="Email" required ngModel
+                     #emailInput="ngModel">
+            </div>
+            <small class="form-text bg-danger rounded text-white"
+                   *ngIf="emailInput.invalid && emailInput.touched">Please enter Email</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <div>
+            <label for="firstName" class="font-weight-bold">First Name</label>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fas fa-user"></i></span>
+              </div>
+              <input id="firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required
+                     ngModel
+                     #firstNameInput="ngModel">
+            </div>
+            <small class="form-text bg-danger rounded text-white"
+                   *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter First Name</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <div>
+            <label for="lastName" class="font-weight-bold">Last Name</label>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fas fa-user"></i></span>
+              </div>
+              <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required
+                     ngModel
+                     #lastNameInput="ngModel">
+            </div>
+            <small class="form-text bg-danger rounded text-white"
+                   *ngIf="lastNameInput.invalid && lastNameInput.touched">Please enter Last Name</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <div>
+            <label for="password" class="font-weight-bold">Password</label>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fas fa-key"></i></span>
+              </div>
+              <input id="password" type="password" class="form-control" name="password" placeholder="Password" required
+                     ngModel
+                     #passwordInput="ngModel">
+            </div>
+            <small class="form-text bg-danger rounded text-white"
+                   *ngIf="passwordInput.invalid && passwordInput.touched">Please enter Password</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <div>
+            <label for="rePassword" class="font-weight-bold">Confirm Password</label>
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fas fa-key"></i></span>
+              </div>
+              <input id="rePassword" type="password" class="form-control" name="rePassword"
+                     placeholder="Confirm Password" required ngModel
+                     #rePasswordInput="ngModel">
+            </div>
+            <small class="form-text bg-danger rounded text-white"
+                   *ngIf="rePasswordInput.invalid && rePasswordInput.touched">Please enter Password</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+          <div>
+            <div class="input-group mb-3">
+
+              <input class="form-check-input position-static" type="checkbox" name="randomPassword" id="randomPassword"
+                     value="option1" aria-label="..." ngModel
+                     #randomPasswordInput="ngModel"> Random Password
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check col-md-6 mb-3">
+          <input class="form-check-input position-static" type="checkbox" name="sendEmail" id="sendEmail"
+                 value="option1" aria-label="..." ngModel
+                 #sendEmailInput="ngModel">Send me email with credentials!
+        </div>
+
+      </div>
+      <button [disabled]="registerForm.invalid" class="btn btn-secondary" type="submit">
+
+
+        <span >Register</span>
+      </button>
+
+      <div class="mt-4">
+        <div class="d-flex justify-content-center links">
+          Already have an account? <a routerLink="../../user/login" class="ml-2" style="color: #2C3E50;">Log In</a>
+        </div>
+      </div>
+    </form>
+    <br>
+  </div>
+</div>
+
+<hr>
