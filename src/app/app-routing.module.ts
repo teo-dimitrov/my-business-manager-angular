@@ -1,7 +1,11 @@
-import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {ReportsComponent} from "./pages/report/reports/reports.component";
+import {PageNotFoundPageComponent} from "./pages/page-not-found-page/page-not-found-page.component";
+import {LoginComponent} from "./auth/login/login.component";
+import {RegisterComponent} from "./auth/register/register.component";
+import {ProfileComponent} from "./auth/profile/profile.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -10,10 +14,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   { path: 'reports/all', component: ReportsComponent },
-  // { path: 'register', component: RegisterComponent },
-  // { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard] },
+  { path: 'user/login', component: LoginComponent },
+  { path: 'user/register', component: RegisterComponent },
+  { path: 'user/profile', component: ProfileComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  // { path: '**', component: PageNotFoundPageComponent }
+  { path: '**', component: PageNotFoundPageComponent }
 
 ];
 

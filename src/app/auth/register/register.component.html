@@ -6,7 +6,7 @@
   <div class="card">
     <form
       class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center"
-      #registerForm="ngForm" >
+      #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <div>
@@ -121,15 +121,15 @@
         </div>
 
       </div>
-      <button [disabled]="registerForm.invalid" class="btn btn-secondary" type="submit">
-
-
-        <span >Register</span>
+      <button [disabled]="registerForm.invalid || showLoading" class="btn btn-secondary" type="submit">
+        <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
+        <span *ngIf="showLoading">Loading...</span>
+        <span *ngIf="!showLoading">Register</span>
       </button>
 
       <div class="mt-4">
         <div class="d-flex justify-content-center links">
-          Already have an account? <a routerLink="../../user/login" class="ml-2" style="color: #2C3E50;">Log In</a>
+          Already have an account? <a routerLink="/login" class="ml-2" style="color: #2C3E50;">Log In</a>
         </div>
       </div>
     </form>
