@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       )
     );
-    location.reload();
+    location.reload();//todo fix this bug!
   }
 
   private sendErrorNotification(notificationType: NotificationType, message: string): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import {map, Observable} from 'rxjs';
 import { User } from '../model/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -17,6 +17,15 @@ export class AuthenticationService {
 
 
   constructor(private http: HttpClient) {}
+
+  login$(userData: { email: string, password: string }): Observable<User> {
+    // @ts-ignore
+    return this.http
+      .post<User>(`${environment.apiUrl}/login`, userData, { withCredentials: true, observe: 'response' })
+      .pipe(
+        map(response => response.body),
+      );
+  }
 
   public login(user: User): Observable<HttpResponse<User>> {
     return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });

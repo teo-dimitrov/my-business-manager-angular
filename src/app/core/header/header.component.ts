@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../model/user";
-import {Subscription} from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { Router } from '@angular/router';
 import {AuthenticationService} from "../../service/authentication.service";
 import {UserService} from "../../service/user.service";
@@ -45,5 +45,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnDestroy(): void{
     this.subscriptions.forEach(sub => sub.unsubscribe());
+
   }
 }

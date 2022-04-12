@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule} from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +25,8 @@ import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
   imports: [
     HttpClientModule,
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     CoreModule,
     NotificationModule,
