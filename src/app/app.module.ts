@@ -1,21 +1,20 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
-import { ReactiveFormsModule} from '@angular/forms'
-import { BrowserModule } from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {NgModule} from '@angular/core';
 import {CoreModule} from "./core/core.module";
+import {FormsModule} from '@angular/forms'
+import {BrowserModule} from '@angular/platform-browser';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {NotificationModule} from './notification.module';
 import {NotificationService} from './service/notification.service';
 import {HeaderComponent} from "./core/header/header.component";
 import {FooterComponent} from "./core/footer/footer.component";
 import {PagesModule} from "./pages/pages.module";
-import { AuthenticationGuard } from './core/guard/authentication.guard';
-import { UserService } from './service/user.service';
+import {AuthenticationGuard} from './core/guard/authentication.guard';
+import {UserService} from './service/user.service';
 import {AuthenticationService} from "./service/authentication.service";
 import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
-
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -23,26 +22,26 @@ import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
 
   ],
   imports: [
-    HttpClientModule,
     BrowserModule,
-    ReactiveFormsModule,
-    FormsModule,
     AppRoutingModule,
-    CoreModule,
+    FormsModule,
+    RouterModule,
+    CoreModule.forRoot(),
+    HttpClientModule,
     NotificationModule,
-    PagesModule,
-
+    PagesModule
   ],
   providers: [
     NotificationService,
-    AuthenticationGuard,
-    AuthenticationService,
     UserService,
-
-    {provide:
+    AuthenticationService,
+    AuthenticationGuard,
+    {
+      provide:
       HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true}
+      multi: true
+    }
   ],
   bootstrap: [
     AppComponent,
@@ -50,4 +49,5 @@ import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
     FooterComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

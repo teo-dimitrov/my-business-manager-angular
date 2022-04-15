@@ -9,6 +9,8 @@ import { CustomHttpResponse } from '../core/interfaces/custom-http-response';
 export class UserService {
   private host = environment.apiUrl;
 
+  currentUser: User;
+
   constructor(private http: HttpClient) {}
 
   public getUsers(): Observable<User[]> {
@@ -62,5 +64,4 @@ export class UserService {
     formData.append('isNonLocked', JSON.stringify(user.notLocked));
     return formData;
   }
-
 }

@@ -1,33 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {map, Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { User } from '../model/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-
-
-
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
+
+  user = new BehaviorSubject<User>(null);
   public host = environment.apiUrl;
   private token: string | undefined;
   private loggedInUsername: string | undefined;
   private jwtHelper = new JwtHelperService();
 
-
   constructor(private http: HttpClient) {}
 
-  login$(userData: { email: string, password: string }): Observable<User> {
-    // @ts-ignore
-    return this.http
-      .post<User>(`${environment.apiUrl}/login`, userData, { withCredentials: true, observe: 'response' })
-      .pipe(
-        map(response => response.body),
-      );
-  }
-
   public login(user: User): Observable<HttpResponse<User>> {
+    this.user.next(user);
     return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
   }
 
@@ -53,7 +43,6 @@ export class AuthenticationService {
   }
 
   public getUserFromLocalCache(): User {
-    // @ts-ignore
     return JSON.parse(localStorage.getItem('user'));
   }
 
@@ -65,7 +54,6 @@ export class AuthenticationService {
     return this.token || "";
   }
 
-  // @ts-ignore
   public isUserLoggedIn(): boolean {
     this.loadToken();
     if (this.token != null && this.token !== ''){
@@ -80,6 +68,5 @@ export class AuthenticationService {
       return false;
     }
   }
-
 }
 

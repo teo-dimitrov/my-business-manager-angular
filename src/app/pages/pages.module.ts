@@ -5,6 +5,8 @@ import {RouterModule} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import { ReportsComponent } from './report/reports/reports.component';
 import {PageNotFoundPageComponent} from "./page-not-found-page/page-not-found-page.component";
+import { UserComponent } from './user/user.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -12,11 +14,14 @@ import {PageNotFoundPageComponent} from "./page-not-found-page/page-not-found-pa
   declarations: [
     HomeComponent,
     ReportsComponent,
-    PageNotFoundPageComponent
+    PageNotFoundPageComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 
 })

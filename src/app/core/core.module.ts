@@ -1,9 +1,11 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import {CommonModule} from '@angular/common';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
 import {RouterModule} from "@angular/router";
-import { UserService } from "../service/user.service";
+import {UserService} from "../service/user.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 
 @NgModule({
@@ -26,8 +28,12 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        UserService
-
+        UserService,
+        {
+          provide: HTTP_INTERCEPTORS,
+          multi: true,
+          useClass: AuthInterceptor,
+        }
       ]
     }
   }

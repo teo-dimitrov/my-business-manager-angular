@@ -14,7 +14,7 @@ import { HeaderType } from '../../enums/header-type.enum';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  public showLoading: boolean | undefined;
+  public showLoading: boolean;
   private subscriptions: Subscription[] = [];
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.authenticationService.isUserLoggedIn()) {
       this.router.navigateByUrl('/home');
     } else {
-      this.router.navigateByUrl('user/login');
+      this.router.navigateByUrl('/user/login');
     }
   }
 
@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authenticationService.login(user).subscribe(
         (response: HttpResponse<User>) => {
-          const token = response.headers.get(HeaderType.JWT_TOKEN) || "";
+          const token = response.headers.get(HeaderType.JWT_TOKEN);
           this.authenticationService.saveToken(token);
           this.authenticationService.addUserToLocalCache(response.body);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/user/users');
           this.showLoading = false;
         },
         (errorResponse: HttpErrorResponse) => {
@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       )
     );
-    location.reload();//todo fix this bug!
   }
 
   private sendErrorNotification(notificationType: NotificationType, message: string): void {
@@ -59,5 +58,4 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-
 }
